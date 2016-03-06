@@ -1,0 +1,1 @@
+<p>Välkommen <?php echo $_SESSION['first_name']; ?> till skyddad sida!</p>
