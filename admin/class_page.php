@@ -11,7 +11,7 @@
                 $query = "INSERT INTO class (class_name, start_date, active) ";
                 $query .= "VALUES (:class_name, :start_date, :active)";
                 $ps = $db->prepare($query);
-            $ps->bindValue('class_name', $_POST['class_name']);
+            $ps->bindValue('class_name', ucfirst(strtolower($_POST['class_name'])));
             $ps->bindValue('start_date', $_POST['start_date']);
             $ps->bindValue('active', $_POST['status']);
 
@@ -92,32 +92,39 @@
     $students = $ps->fetchAll(PDO::FETCH_ASSOC);
 
     */
-echo "<h3>Aktiva klasser</h3>";
-echo "<ul>";
+?>
+
+<h2>Klasser</h2>
+<?php
+echo "<ul class=\"class_page_box\">";
+echo "<li class=\"class_status_header\">";
+echo "<h3 class=\"cl_head_green\">Aktiva klasser</h3>";
+echo "</li>";
+echo "<li>";
 foreach($active_classes as $class){
-    echo "<div class=\"class_page_class_list\">";
-    echo "<li style=\"text-transform: uppercase;\"><a href=\"?p=manage_class&edit={$class['id']}\">{$class['class_name']} - {$class['id']} </a></li>";
-    echo "</div>";
+    echo "<a href=\"?p=manage_class&edit={$class['id']}\"><ul class=\"class_page_class_list\">";
+    echo "<li>{$class['class_name']}</li>";
+    echo "<li>{$class['start_date']}</li>";
+    echo "</ul></a>";
 }
+echo "</li>";
 echo "</ul>";
 
 echo "<h3>Inaktiva klasser</h3>";
-echo "<ul>";
 foreach($inactive_classes as $class){
-    echo "<div class=\"class_page_class_list\">";
-    echo "<li style=\"text-transform: uppercase;\"><a href=\"?p=manage_class&edit={$class['id']}\">{$class['class_name']} - {$class['id']} </a></li>";
-    echo "</div>";
+    echo "<a href=\"?p=manage_class&edit={$class['id']}\"><ul class=\"class_page_class_list\">";
+    echo "<li>{$class['class_name']}</li>";
+    echo "<li>{$class['start_date']}</li>";
+    echo "</ul></a>";
 }
-echo "</ul>";
 
 echo "<h3>Kommande klasser</h3>";
-echo "<ul>";
 foreach($future_classes as $class){
-    echo "<div class=\"class_page_class_list\">";
-    echo "<li style=\"text-transform: uppercase;\"><a href=\"?p=manage_class&edit={$class['id']}\">{$class['class_name']} - {$class['id']} </a></li>";
-    echo "</div>";
+    echo "<a href=\"?p=manage_class&edit={$class['id']}\"><ul class=\"class_page_class_list\">";
+    echo "<li>{$class['class_name']}</li>";
+    echo "<li>{$class['start_date']}</li>";
+    echo "</ul></a>";
 }
-echo "</ul>";
 ?>
 
 

@@ -32,7 +32,7 @@ foreach($future_classes as $class){
     echo "<tr>";
     echo "<td>{$class['class_name']}</td>";
     echo "<td>{$class['start_date']}</td>";
-    echo "<td><a class=\"booking_button\" href='?p=register_student&classid={$class['id']}'>ANMÄL</td>";
+    echo "<td><a class=\"booking_button\" href='?p=register_student&classid={$class['id']}#register_content'>Anmäl</td>";
     //echo "<td><a href='?p=edit_page&edit={$page['id']}'>Edit</a> | <a href='?p=view_pages&delete={$page['id']}'>Delete</a></td>";
     echo "</tr>";
 }

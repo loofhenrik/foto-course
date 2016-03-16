@@ -30,6 +30,8 @@
     }
 ?>
 
+<h2>Uppgifter</h2>
+
 <?php
 	try{
      $query = "SELECT * ";
@@ -41,7 +43,6 @@
     catch (Exception $e){
         echo $e->getMessage();
     }
-
 
     /*
     $query = "SELECT * ";

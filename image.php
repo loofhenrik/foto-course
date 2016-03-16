@@ -42,46 +42,46 @@ function upload(){
 		//deklarera vars
 		$type = $size['mime'];
 		$imgfp = fopen($_FILES['userfile']['tmp_name'], 'rb');
-    	$size = $size[3];
-    	$name = $_FILES['userfile']['name'];
-    	//vad ska jag göra med maxsize?
-    	$maxsize = 99999999;
+  	$size = $size[3];
+  	$name = $_FILES['userfile']['name'];
+  	//vad ska jag göra med maxsize?
+  	$maxsize = 99999999;
 
-    	//kolla om filen är mindre än maxstorlek
-    	if($_FILES['userfile']['size'] < $maxsize)
-    	{
-    		define("DSN", "mysql:host=localhost;dbname=ex_foto;");
+  	//kolla om filen är mindre än maxstorlek
+  	if($_FILES['userfile']['size'] < $maxsize)
+  	{
+  		define("DSN", "mysql:host=localhost;dbname=ex_foto;");
 			define("USER", "root");
 			define("PASS", "");
 			$opt = array(
-		    // any occurring errors will be thrown as PDOException
-		    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-		    // an SQL command to execute when connecting
-		    PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'"
-		);
+	    // any occurring errors will be thrown as PDOException
+	    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+	    // an SQL command to execute when connecting
+	    PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'"
+	  );
 
 			$db = new PDO(DSN, USER, PASS, $opt);
 
-    		$query = "INSERT INTO images (image_type, image, image_size, image_name) ";
-    		$query .= "VALUES (? ,?, ?, ?)";
-    		$ps = $db->prepare($query);
-    		$ps->bindParam(1, $type);
-    		$ps->bindParam(2, $imgfp, PDO::PARAM_LOB);
-    		$ps->bindParam(3, $size);
-    		$ps->bindParam(4, $name);
+  		$query = "INSERT INTO images (image_type, image, image_size, image_name, student_id) ";
+  		$query .= "VALUES (? ,?, ?, ?)";
+  		$ps = $db->prepare($query);
+  		$ps->bindParam(1, $type);
+  		$ps->bindParam(2, $imgfp, PDO::PARAM_LOB);
+  		$ps->bindParam(3, $size);
+  		$ps->bindParam(4, $name);
+      $ps->bindParam(5, $stud_id);
 
-    		//utför query
-            $ps->execute();
-    	}
-    	else
-    	{
-    		throw new Exception("Fel filstorlek.");
-    	}
+  		//utför query
+      $ps->execute();
+  	}
+  	else
+  	{
+  		throw new Exception("Fel filstorlek.");
+  	}
 	}
 	else
 	{
 		throw new Exception("Filformatet stöds inte.");
-		
 	}
 }
 

@@ -12,8 +12,8 @@
 
 		if(isset($_POST['submit'])){
 
-			$firstname = trim($_POST['firstname']);
-			$lastname = trim($_POST['lastname']);
+			$firstname = trim(ucfirst(strtolower($_POST['firstname'])));
+			$lastname = trim(ucfirst(strtolower($_POST['lastname'])));
 			$email = trim($_POST['email']);
 			$password = trim($_POST['password']);
 			$confirm_password = trim($_POST['confirm_password']);
@@ -147,13 +147,13 @@
 			<td><input type="text" name="confirm_password" maxlength="30" </td></td>
 		</tr>
 		<tr>
-			<td colspan="2"><input type="submit" name="submit" value="Registrera"></td>
+			<td><input type="submit" name="submit" value="Registrera"></td>
 		</tr>
 
 		<!-- Lägga till bekräfta lösenord !!! -->
 	</table>
 </form>
-<a href="?p=show_classes">Tillbaka till klasser</a>
+<a href="?p=show_classes">Visa klasser</a>
 </div>
 
 
